@@ -1,0 +1,22 @@
+{
+	"name" : "silverstripe-modules/recurringevents",
+	"description" : "Adds recurring event functionality",
+	"type" : "silverstripe-module",
+	"keywords" : [
+		"silverstripe",
+		"event",
+		"recurring"
+	],
+	"authors" : [{
+			"name" : "Guy Watson",
+			"email" : "guy.watson@internetrix.com.au"
+		}
+	],
+	"require" : {
+		"silverstripe/framework" : "~3.1"
+	},
+	"extra" : {
+		"installer-name" : "recurringevents"
+	},
+	"minimum-stability" : "dev"
+}
