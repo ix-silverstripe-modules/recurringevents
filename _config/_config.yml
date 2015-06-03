@@ -1,0 +1,12 @@
+LeftAndMain:
+  extra_requirements_css:
+    - 'recurringevents/css/field-extras.css'
+EventsAdmin:
+  extensions:
+    - 'RecurringEventsModelAdminExtension'
+GridFieldDetailForm_ItemRequest:
+  extensions:
+    - GridFieldRecurringEventsItemRequest
+CalendarEvent:
+  extensions:
+    - 'RecurringEventsExtension'
