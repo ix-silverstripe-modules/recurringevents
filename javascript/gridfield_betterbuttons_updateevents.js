@@ -46,12 +46,19 @@ $.entwine('ss', function($) {
 			});
 		},
 		showDialog: function(url) {
+			
+			var txt = '<br/><div class="message bad">You have unsaved changes that will not be passed on to the recurring events.</div>';
+			if( !$(this).closest('form').is('.changed') ){
+				txt = '';
+			}
+			
 			var dlg = this.getDialog();
 
 			dlg.empty().dialog("open").parent().addClass("loading");
 
 			dlg.load(this.getURL(), function(){
 				dlg.parent().removeClass("loading");
+				dlg.prepend(txt);
 			});
 		}
 	});

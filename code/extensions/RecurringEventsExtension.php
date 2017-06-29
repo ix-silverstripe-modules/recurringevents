@@ -77,17 +77,22 @@ class RecurringEventsExtension extends DataExtension {
 	);
 	
 	private static $update_recurring_events_summary_fields = array(
-		'Title',
-		"Status",
-		'Start.Nice',
-		'End.Nice',
-		'DisplayCategories'
+		'Title'=>'Title',
+		"Status"=>'Status',
+		'Start.Nice'=>'Start',
+		'End.Nice'=>'End',
+		'DisplayCategories'=>'Categories'
 	);
 	
 	public function updateEventCMSFields($fields) {
 		
 		if($this->owner->Duplicate){
 			$fields->removeByName('RecurringEvents');
+			$master = DBField::create_field('HTMLText', '<a href="/admin/pages/edit/show/'.$this->owner->MasterEventID.'">Edit Master Event</a>' );
+			$fields->addFieldsToTab('Root.RecurringEvent',array(
+				$mf = ReadonlyField::create('EditEvent','This event is a recurrance.', $master)
+			));
+			$mf->dontEscape = true;
 		} else {
 			$fields->addFieldToTab('Root.RecurringEvents', CheckboxField::create('Recurring', 'Is this a recurring event?'));
 			$fields->addFieldToTab('Root.RecurringEvents', NumericField::create('Occurrences', 'How many times will this event recur?')
@@ -123,7 +128,7 @@ class RecurringEventsExtension extends DataExtension {
 				$fields->addFieldToTab('Root.RecurringEvents', DisplayLogicWrapper::create(
 					GridField::create('
 						RecurringEvents', 
-						'Linked Events', 
+						'Recurring Events', 
 						$this->owner->RecurringEvents(),
 						GridFieldConfig_Base::create()
 					)
@@ -541,7 +546,7 @@ class RecurringEventsExtension extends DataExtension {
 		
 		$gridfield = GridField::create(
 			'RecurringEvents', 
-			'Linked Events', 
+			'Recurring Events', 
 			$this->owner->RecurringEvents(),
 			$config
 		);
@@ -558,7 +563,7 @@ class RecurringEventsExtension extends DataExtension {
 		);
 		if((method_exists($this->owner, 'canPublish') && $this->owner->canPublish())  || (!method_exists($this->owner, 'canPublish') && $this->owner->canEdit()) ){
 			$actions->push(
-				FormAction::create('doPublishSelected', 'Save and publish master details to selected')
+				FormAction::create('doPublishSelected', 'Save &amp; Publish master details to selected')
 					->setUseButtonTag('true')
 					->addExtraClass('ss-ui-action-constructive')
 					->setAttribute('data-icon','accept')
