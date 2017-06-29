@@ -72,28 +72,41 @@ class RecurringEventsModelAdminExtension extends DataExtension {
 			
 			$dataColumns->setFieldFormatting($newFieldFormatting);
 			$config->addComponent(new GridFieldRecurringEventsKey());
+			
+			/*
 			$alerts = array(
 				'Duplicate' => array(
 					'comparator' => 'equal',
 					'patterns' => array(
 						'1' => array(
-								'status' => 'clone',
-								'message' => function($record) { 
-									$master = $record->MasterEvent();
-									if($master && $master->exists()){
-										$oneDay = $master->OneDay();
-										$format =  $oneDay ? "Cloned from master event - %s ( %s )" : "Cloned from master event - %s ( %s - %s )";
-										return sprintf($format, $master->Title, $master->dbObject('Start')->Date(), $master->dbObject('End')->Date());
-									}
-										
-									return "cant find master event"; 
+							'status' => 'clone',
+							'message' => function($record) {
+								$master = $record->MasterEvent();
+								if($master && $master->exists()){
+									$oneDay = $master->OneDay();
+									$format =  $oneDay ? "Cloned from master event - %s ( %s )" : "Cloned from master event - %s ( %s - %s )";
+									return sprintf($format, $master->Title, $master->dbObject('Start')->Date(), $master->dbObject('End')->Date());
 								}
+								return "Can't find master event.";
+							}
+						), '0' => array(
+							'status' => 'master',
+							'message' => function($record) {
+								$master = $record->RecurringEvents()->Count();
+								if($master && $master > 0){
+									$oneDay = $master;
+									$format =  $oneDay ? "Master event with %s recurrences" : "";
+									return sprintf($format, $master);
+								}
+								return "";
+							}
 						),
 					),
 				),
 			);
 			
 			$config->addComponent(new GridFieldMasterHighlighter($alerts));
+			*/
 		}
 	}
 

@@ -116,8 +116,13 @@ class GridFieldMasterHighlighter implements GridField_ColumnProvider {
 						$message = sprintf($message, Convert::raw2xml($nominalvalue), Convert::raw2xml($actualvalue));
 					}
 					
+					$status = $return['status'];
+					if( !$message ){
+						$status = '';
+					}
+					
 					$alerts[$getter] = array(
-						'status' 	=> $return['status'],
+						'status' 	=> $status,
 						'message' 	=> $message,
 					);
 					break;

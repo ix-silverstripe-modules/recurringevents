@@ -31,11 +31,11 @@ class GridFieldRecurringEventsKey implements
 	public function getHTMLFragments($grid) {
 		$data = ArrayList::create(array(
 			ArrayData::create(array(
-				'Title' => 'Master Event with clones',
+				'Title' => 'Master Event with recurrences',
 				'Colour' => Config::inst()->get('CalendarEvent', 'master_colour')
 			)),
 			ArrayData::create(array(
-				'Title' 	=> 'Cloned Event',
+				'Title' 	=> 'Recurring Event',
 				'Colour' 	=> Config::inst()->get('CalendarEvent', 'duplicate_colour')
 			)),
 			ArrayData::create(array(

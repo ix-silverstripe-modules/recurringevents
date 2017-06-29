@@ -7,6 +7,9 @@ LeftAndMain:
 EventsAdmin:
   extensions:
     - 'RecurringEventsModelAdminExtension'
+ArchivedEventsAdmin:
+  extensions:
+    - 'RecurringEventsModelAdminExtension'
 GridFieldDetailForm_ItemRequest:
   extensions:
     - GridFieldRecurringEventsItemRequest
