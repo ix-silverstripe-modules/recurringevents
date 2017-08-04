@@ -539,7 +539,7 @@ class RecurringEventsExtension extends DataExtension {
 			$summaryFields = array_combine(array_values($summaryFields), array_values($summaryFields));
 		}
 		
-		$config = GridFieldConfig_Base::create()
+		$config = GridFieldConfig_Base::create(1000)
 			->addComponent(new GridFieldSelectColumns())
 			->removeComponentsByType('GridFieldFilterHeader');
 		$config->getComponentByType('GridFieldDataColumns')->setDisplayFields($summaryFields);
