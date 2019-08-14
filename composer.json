@@ -1,22 +1,41 @@
 {
-	"name" : "silverstripe-modules/recurringevents",
-	"description" : "Adds recurring event functionality",
-	"type" : "silverstripe-module",
-	"keywords" : [
-		"silverstripe",
-		"event",
-		"recurring"
-	],
-	"authors" : [{
-			"name" : "Guy Watson",
-			"email" : "guy.watson@internetrix.com.au"
-		}
-	],
-	"require" : {
-		"silverstripe/framework" : "~3.1"
-	},
-	"extra" : {
-		"installer-name" : "recurringevents"
-	},
-	"minimum-stability" : "dev"
+    "name": "internetrix/silverstripe-recurringevents",
+    "description": "Adds recurring event functionality",
+    "type": "silverstripe-vendormodule",
+    "repositories": [
+        {
+            "type": "git",
+            "url": "git@gitlab.internetrix.net:silverstripe-modules/events.git",
+            "name": "internetrix/silverstripe-events"
+        }
+    ],
+    "keywords": [
+        "silverstripe",
+        "event",
+        "recurring"
+    ],
+    "authors": [{
+            "name": "Guy Watson",
+            "email": "guy.watson@internetrix.com.au"
+        }
+    ],
+    "require": {
+        "silverstripe/framework": "^4.4",
+        "silverstripe/cms": "^4.4",
+        "silverstripe/admin": "^1.3",
+        "internetrix/silverstripe-events": "dev-master",
+        "colymba/gridfield-bulk-editing-tools": "^3"
+    },
+    "extra": {
+        "installer-name": "recurringevents",
+        "expose": [
+            "css",
+            "javascript"
+        ]
+    },
+    "replace": {
+        "silverstripe-modules/recurringevents": "self.version"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }

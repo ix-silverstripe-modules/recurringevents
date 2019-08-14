@@ -1,35 +1,35 @@
 (function($) {
-	var fetching = false;
-    var delay 	 = (function(){
-    	var timer = 0;
-    	return function(callback, ms){
-	    clearTimeout (timer);
-	    timer = setTimeout(callback, ms);
-	  };
+	let fetching = false;
+	let delay = (function(){
+		let timer = 0;
+		return function(callback, ms){
+			clearTimeout (timer);
+			timer = setTimeout(callback, ms);
+		};
 	})();
-	    
+
 	$('input[name=Occurrences]').entwine({
 		onkeyup: function(e) {
-			var delaytime 	= 700;
-			var me 			= $(this);
-			
-			delay(function(){
-				if(!fetching){
-					fetching 		 = true;
+			let delaytime = 700;
+			let me = $(this);
+
+			delay(function() {
+				if(!fetching) {
+					fetching = true;
 					me.addClass('loading');
-					var formUrl 	 = me.parents('form').attr('action')
-						formUrlParts = formUrl.split('?'),
-						formUrl 	 = formUrlParts[0],
-						url 		 = formUrl + '/field/SpecificDates/FieldsHTML';
+					let formUrl = me.parents('form').attr('action');
+					let formUrlParts = formUrl.split('?');
+					let formUrl = formUrlParts[0];
+					let url  = formUrl + '/field/SpecificDates/FieldsHTML';
 					$.ajax({
 						url: url,
-						type: "POST",
+						type: 'POST',
 						data: { occurrences: me.val()},
 						success: function(data) {
 							$('#specific-date-field').replaceWith(data);
 							fetching = false;
 						},
-						complete: function(){
+						complete: function() {
 							me.removeClass('loading');
 						}
 					});
@@ -37,5 +37,5 @@
 			}, delaytime );
 		}
 	});
-	
+
 }(jQuery));

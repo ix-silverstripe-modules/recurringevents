@@ -1,18 +1,18 @@
 ---
 Name: recurringevents
 ---
-LeftAndMain:
+SilverStripe\Admin\LeftAndMain:
   extra_requirements_css:
-    - 'recurringevents/css/field-extras.css'
-EventsAdmin:
+    - internetrix/silverstripe-recurringevents:css/recurringevents-cms.css
+Internetrix\Events\Admin\EventsAdmin:
   extensions:
-    - 'RecurringEventsModelAdminExtension'
-ArchivedEventsAdmin:
+    - Internetrix\RecurringEvents\Extensions\RecurringEventsModelAdminExtension
+Internetrix\Events\Admin\ArchivedEventsAdmin:
   extensions:
-    - 'RecurringEventsModelAdminExtension'
-GridFieldDetailForm_ItemRequest:
+    - Internetrix\RecurringEvents\Extensions\RecurringEventsModelAdminExtension
+Internetrix\Events\Pages\CalendarEvent:
   extensions:
-    - GridFieldRecurringEventsItemRequest
-CalendarEvent:
+    - Internetrix\RecurringEvents\Extensions\RecurringEventsExtension
+Internetrix\Events\Pages\EventsPage:
   extensions:
-    - 'RecurringEventsExtension'
+    - Internetrix\RecurringEvents\Extensions\RecurringEventsPageExtension

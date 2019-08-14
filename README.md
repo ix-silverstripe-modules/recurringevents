@@ -9,11 +9,11 @@ Maintainer Contact
 
 ## Requirements
 
-SilverStripe 3.1.6. (Not tested with any other versions)
+* SilverStripe 4.4.0 or above
 
 ## Dependencies
 
-irxeventcalendar module
+* internetrix/silverstripe-events
 
 It is possible to extend your own custom event class. You will however need to do the following
 
@@ -24,9 +24,8 @@ $this->extend('updateEventCMSFields', $fields);
 
 ### Configuration
 
-Please copy and paste the following to your _config/config.yml or similar. Subsitute `CalendarEvent` with your event class
+Please copy and paste the following to your _config/config.yml or similar. Substitute `Internetrix\Events\Pages\CalendarEvent` with your event class
 
-CalendarEvent:
+Internetrix\Events\Pages\CalendarEvent:
   extensions:
-    - 'RecurringEventsExtension'
-    
+    - Internetrix\RecurringEvents\Extensions\RecurringEventsExtension
