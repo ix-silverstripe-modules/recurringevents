@@ -1,0 +1,22 @@
+.recurringevents-key-item {
+	padding: 5px;
+}
+
+.recurringevents-key-block {
+	width: 20px;
+	height: 20px;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+.recurringevents-key-text {
+	display: inline-block;
+	vertical-align: middle;
+	position: relative;
+	top: 1px;
+}
+
+.form-check-input.bulkSelect,
+.form-check-input.bulkSelectAll {
+	position: static;
+}
