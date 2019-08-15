@@ -14,6 +14,8 @@ Maintainer Contact
 ## Dependencies
 
 * internetrix/silverstripe-events
+* colymba/gridfield-bulk-editing-tools
+* unclecheese/display-logic
 
 It is possible to extend your own custom event class. You will however need to do the following
 
