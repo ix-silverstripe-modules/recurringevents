@@ -19,7 +19,7 @@
 					me.addClass('loading');
 					let formUrl = me.parents('form').attr('action');
 					let formUrlParts = formUrl.split('?');
-					let formUrl = formUrlParts[0];
+					formUrl = formUrlParts[0];
 					let url  = formUrl + '/field/SpecificDates/FieldsHTML';
 					$.ajax({
 						url: url,
