@@ -23,7 +23,7 @@
         "silverstripe/framework": "^4.4",
         "silverstripe/cms": "^4.4",
         "silverstripe/admin": "^1.3",
-        "internetrix/silverstripe-events": "dev-master",
+        "internetrix/silverstripe-events": "^2",
         "colymba/gridfield-bulk-editing-tools": "^3"
     },
     "extra": {
