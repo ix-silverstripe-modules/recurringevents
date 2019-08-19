@@ -130,14 +130,6 @@ class RecurringEventsExtension extends DataExtension
         'CustomRecurringFrequency',
     ];
 
-    private static $update_recurring_events_summary_fields = [
-        'Title' => 'Title',
-        'Status' => 'Status',
-        'Start.Nice' => 'Start',
-        'End.Nice' => 'End',
-        'DisplayCategories' => 'Categories',
-    ];
-
     public function updateEventCMSFields($fields)
     {
         if ($this->owner->Duplicate) {
@@ -188,7 +180,7 @@ class RecurringEventsExtension extends DataExtension
                 $sdFields->setEnds($ends);
             }
 
-            if ($this->RecurringCount()) {
+            if ($this->owner->RecurringEvents()->Count()) {
                 $fields->addFieldToTab('Root.RecurringEvents', \UncleCheese\DisplayLogic\Forms\Wrapper::create(
                     $recurringEventsField = GridField::create(
                         'RecurringEvents',
@@ -241,7 +233,9 @@ class RecurringEventsExtension extends DataExtension
                         $this->owner->Iteration = $i;
 
                         //the duplicate method calls onBeforeDuplicate. This is where we update its properties and where write is performed
-                        $newEvent = $this->owner->duplicate(true);
+                        $newEvent = $this->owner->duplicate(true, [
+                            'Categories',
+                        ]);
                         $newEvent->publish('Stage', 'Live');
                     }
                 } else {
@@ -412,11 +406,6 @@ class RecurringEventsExtension extends DataExtension
         $this->owner->publish('Stage', 'Live');
 
         return $this->owner;
-    }
-
-    public function RecurringCount()
-    {
-        return $this->owner->RecurringEvents()->Count();
     }
 
     /*
