@@ -273,34 +273,36 @@ class RecurringEventsExtension extends DataExtension
     {
         $clone = $this->owner;
 
-        $i = $original->Iteration;
+        if ($original->Recurring && $original->Occurrences) {
+            $i = $original->Iteration;
 
-        if ($clone->RecurringFrequency == 'Weekly') {
-            $clone->Start = strtotime(date('Y-m-d H:i:s', strtotime($original->Start)) . " +$i week");
-            $clone->End = strtotime(date('Y-m-d H:i:s', strtotime($original->End)) . " +$i week");
-        } elseif ($clone->RecurringFrequency == 'Fortnightly') {
-            $clone->Start = strtotime(date('Y-m-d H:i:s', strtotime($original->Start)) . ' +' . $i * 2 . ' week');
-            $clone->End = strtotime(date('Y-m-d H:i:s', strtotime($original->End)) . ' +' . $i * 2 . ' week');
-        } elseif ($clone->RecurringFrequency == 'Monthly') {
-            $clone->Start = strtotime(date('Y-m-d H:i:s', strtotime($original->Start)) . " +$i month");
-            $clone->End = strtotime(date('Y-m-d H:i:s', strtotime($original->End)) . " +$i month");
-        } elseif ($clone->RecurringFrequency == 'Custom') {
-            $clone->Start = strtotime(date('Y-m-d H:i:s', strtotime($original->Start)) . ' +' . $i * $original->CustomRecurringNumber . ' ' . $original->CustomRecurringFrequency);
-            $clone->End = strtotime(date('Y-m-d H:i:s', strtotime($original->End)) . ' +' . $i * $original->CustomRecurringNumber . ' ' . $original->CustomRecurringFrequency);
-        } elseif ($clone->RecurringFrequency == 'Annually') {
-            $clone->Start = strtotime(date('Y-m-d H:i:s', strtotime($original->Start)) . " +$i year");
-            $clone->End = strtotime(date('Y-m-d H:i:s', strtotime($original->End)) . " +$i year");
-        } else {
-            $specificStarts = unserialize($original->SpecificStarts);
-            $specificEnds = unserialize($original->SpecificEnds);
-            $clone->Start = $specificStarts[$i - 1] ?? $original->Start;
-            $clone->End = $specificEnds[$i - 1] ?? $original->End ;
+            if ($clone->RecurringFrequency == 'Weekly') {
+                $clone->Start = strtotime(date('Y-m-d H:i:s', strtotime($original->Start)) . " +$i week");
+                $clone->End = strtotime(date('Y-m-d H:i:s', strtotime($original->End)) . " +$i week");
+            } elseif ($clone->RecurringFrequency == 'Fortnightly') {
+                $clone->Start = strtotime(date('Y-m-d H:i:s', strtotime($original->Start)) . ' +' . $i * 2 . ' week');
+                $clone->End = strtotime(date('Y-m-d H:i:s', strtotime($original->End)) . ' +' . $i * 2 . ' week');
+            } elseif ($clone->RecurringFrequency == 'Monthly') {
+                $clone->Start = strtotime(date('Y-m-d H:i:s', strtotime($original->Start)) . " +$i month");
+                $clone->End = strtotime(date('Y-m-d H:i:s', strtotime($original->End)) . " +$i month");
+            } elseif ($clone->RecurringFrequency == 'Custom') {
+                $clone->Start = strtotime(date('Y-m-d H:i:s', strtotime($original->Start)) . ' +' . $i * $original->CustomRecurringNumber . ' ' . $original->CustomRecurringFrequency);
+                $clone->End = strtotime(date('Y-m-d H:i:s', strtotime($original->End)) . ' +' . $i * $original->CustomRecurringNumber . ' ' . $original->CustomRecurringFrequency);
+            } elseif ($clone->RecurringFrequency == 'Annually') {
+                $clone->Start = strtotime(date('Y-m-d H:i:s', strtotime($original->Start)) . " +$i year");
+                $clone->End = strtotime(date('Y-m-d H:i:s', strtotime($original->End)) . " +$i year");
+            } else {
+                $specificStarts = unserialize($original->SpecificStarts);
+                $specificEnds = unserialize($original->SpecificEnds);
+                $clone->Start = $specificStarts[$i - 1] ?? $original->Start;
+                $clone->End = $specificEnds[$i - 1] ?? $original->End ;
+            }
+
+            $clone->Duplicate = true;
+            $clone->Recurring = false;
+            $clone->Occurrences = 0;
+            $clone->MasterEventID = $original->ID;
         }
-
-        $clone->Duplicate = true;
-        $clone->Recurring = false;
-        $clone->Occurrences = 0;
-        $clone->MasterEventID = $original->ID;
 
         return $clone;
     }
